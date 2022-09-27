@@ -22,6 +22,59 @@ console.log(fxhash); // the 64 chars hex number fed to your algorithm
 //   "Inverted": true
 // }
 
+function getFilename(ext) {
+  return `${fxhash}.${ext}`;
+}
+
+function download(href, name) {
+  const a = document.createElement("a");
+  a.href = href;
+  a.download = name;
+
+  const e = new MouseEvent("click");
+  a.dispatchEvent(e);
+}
+
+function downloadSVG() {
+  const base64doc = btoa(unescape(encodeURIComponent(draw.svg())));
+
+  let href = "data:image/svg+xml;base64," + base64doc;
+  let name = getFilename("svg");
+
+  download(href, name);
+}
+
+function downloadPNG() {
+  let image = new Image();
+
+  const base64doc = btoa(unescape(encodeURIComponent(draw.svg())));
+  image.src = "data:image/svg+xml;base64," + base64doc;
+
+  image.onload = function () {
+    let canvas = document.createElement("canvas");
+    canvas.width = image.width;
+    canvas.height = image.height;
+
+    let context = canvas.getContext("2d");
+    context.drawImage(image, 0, 0);
+
+    let name = getFilename("png");
+    let href = canvas.toDataURL("image/png");
+
+    download(href, name);
+  };
+}
+
+document.addEventListener("keypress", function (event) {
+  if (event.key === "s") {
+    downloadSVG();
+  }
+
+  if (event.key === "S") {
+    downloadPNG();
+  }
+});
+
 import { SVG } from "@svgdotjs/svg.js";
 
 const width = 297;
