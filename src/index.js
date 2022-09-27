@@ -1,8 +1,10 @@
-// these are the variables you can use as inputs to your algorithms
-console.log(fxhash)   // the 64 chars hex number fed to your algorithm
-console.log(fxrand()) // deterministic PRNG function, use it instead of Math.random()
+/* @license add your license lines here, these will be used by webpack.*/
 
-// note about the fxrand() function 
+// these are the variables you can use as inputs to your algorithms
+console.log(fxhash); // the 64 chars hex number fed to your algorithm
+//console.log(fxrand()); // deterministic PRNG function, use it instead of Math.random()
+
+// note about the fxrand() function
 // when the "fxhash" is always the same, it will generate the same sequence of
 // pseudo random numbers, always
 
@@ -20,10 +22,24 @@ console.log(fxrand()) // deterministic PRNG function, use it instead of Math.ran
 //   "Inverted": true
 // }
 
-// this code writes the values to the DOM as an example
-const container = document.createElement("div")
-container.innerText = `
-  random hash: ${fxhash}\n
-  some pseudo random values: [ ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()},... ]\n
-`
-document.body.prepend(container)
+import { SVG } from "@svgdotjs/svg.js";
+
+const width = 297;
+const height = 210;
+
+let draw = SVG()
+  .addTo("body")
+  .size(`${width}mm`, `${height}mm`)
+  .viewbox(0, 0, width, height);
+
+draw.rect(width, height).fill("#fbfbf8");
+
+let pattern = draw.pattern(5, 5, function (add) {
+  add.line(0, 0, 5, 5).stroke({ color: "#2f2f2f", width: 0.5 });
+});
+
+draw
+  .polygon("50,0 60,40 100,50 60,60 50,100 40,60 0,50 40,40")
+  .fill(pattern)
+  .stroke({ width: 1, color: "#2f2f2f" })
+  .move(100, 20);
