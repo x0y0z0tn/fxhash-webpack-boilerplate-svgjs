@@ -96,3 +96,5 @@ draw
   .fill(pattern)
   .stroke({ width: 1, color: "#2f2f2f" })
   .move(100, 20);
+
+fxpreview();
