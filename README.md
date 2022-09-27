@@ -1,6 +1,10 @@
 FXHASH Generative Token webpack boilerplate
 ================
 
+Fork of https://github.com/fxhash/fxhash-webpack-boilerplate .
+
+It includes https://svgjs.dev/ .
+
 A boilerplate to automate and ease the creation of Generative Tokens on fxhash. This project uses [webpack](https://webpack.js.org/) and [webpack-dev-server](https://github.com/webpack/webpack-dev-server) to improve the development and deployment experience.
 
 Before diving into the development of your token, we recommend reading the [Guide to mint a Generative Token](https://fxhash.xyz/articles/guide-mint-generative-token) to get some understanding of the process.
