@@ -35,20 +35,20 @@ function download(href, name) {
   a.dispatchEvent(e);
 }
 
+function getSVGBlobURL() {
+  let clonedSvgElement = document.body.querySelector("svg").cloneNode(true);
+  let outerHTML = clonedSvgElement.outerHTML,
+    blob = new Blob([outerHTML], { type: "image/svg+xml;charset=utf-8" });
+  let URL = window.URL || window.webkitURL || window;
+  return URL.createObjectURL(blob);
+}
+
 function downloadSVG() {
-  const base64doc = btoa(unescape(encodeURIComponent(draw.svg())));
-
-  let href = "data:image/svg+xml;base64," + base64doc;
-  let name = getFilename("svg");
-
-  download(href, name);
+  download(getSVGBlobURL(), getFilename("svg"));
 }
 
 function downloadPNG() {
   let image = new Image();
-
-  const base64doc = btoa(unescape(encodeURIComponent(draw.svg())));
-  image.src = "data:image/svg+xml;base64," + base64doc;
 
   image.onload = function () {
     let canvas = document.createElement("canvas");
@@ -63,6 +63,8 @@ function downloadPNG() {
 
     download(href, name);
   };
+
+  image.src = getSVGBlobURL();
 }
 
 document.addEventListener("keypress", function (event) {
