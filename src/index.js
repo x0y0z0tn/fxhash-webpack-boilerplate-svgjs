@@ -67,11 +67,11 @@ function downloadPNG() {
 
 document.addEventListener("keypress", function (event) {
   if (event.key === "s") {
-    downloadSVG();
+    downloadPNG();
   }
 
   if (event.key === "S") {
-    downloadPNG();
+    downloadSVG();
   }
 });
 
