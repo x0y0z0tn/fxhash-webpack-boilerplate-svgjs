@@ -43,7 +43,9 @@ let draw = SVG()
   .size(`${width}mm`, `${height}mm`)
   .viewbox(0, 0, width, height);
 
-draw.rect(width, height).fill("#fbfbf8");
+const backgroundColor = "#fbfbf8";
+draw.rect(width, height).fill(backgroundColor);
+//document.querySelector("svg").style.background = backgroundColor;
 
 let pattern = draw.pattern(5, 5, function (add) {
   add.line(0, 0, 5, 5).stroke({ color: "#2f2f2f", width: 0.5 });

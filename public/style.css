@@ -11,4 +11,5 @@ body {
 svg {
   /*width: 100vw;*/
   height: 100vh;
+  width: auto;
 }
